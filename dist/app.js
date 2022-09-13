@@ -2,17 +2,18 @@ const taskInputElement = document.querySelector('#task-input');
 const addButtonElement = document.querySelector('#add-button');
 const tasksContainerElement = document.querySelector('.tasks');
 ;
-//const tasks:{title: string; done: boolean;}[]=
+//const tasks:{title: string; done: boolean; category?: string}[]=[
 const tasks = [
-    { title: "Wyrzucić śmieci", done: true },
-    { title: "Zrobić zakupy", done: false },
-    { title: "Zrobić pranie", done: false },
-    { title: "Zrobić obiad", done: false },
+    { title: "Zrobić pranie", done: false, category: "general" },
+    { title: "Zrobić zakupy", done: false, category: "work" },
+    { title: "Wyrzucić śmieci", done: true, category: "home" },
+    { title: "Zrobić obiad", done: false, category: "hobby" }
 ];
 render();
 addButtonElement.addEventListener('click', (event) => {
     event.preventDefault();
-    addTask({ title: taskInputElement.value, done: false });
+    const categoryRadioElement = document.querySelector('input[type="radio"]:checked');
+    addTask({ title: taskInputElement.value, done: false, category: categoryRadioElement.value });
     render();
 });
 function render() {
@@ -20,6 +21,9 @@ function render() {
     tasks.forEach((task, index) => {
         const id = `task-${index}`;
         const taskElement = document.createElement('li');
+        if (task.category) {
+            taskElement.classList.add(task.category);
+        }
         const labelElement = document.createElement('label');
         labelElement.innerText = task.title;
         labelElement.setAttribute('for', id);
@@ -37,5 +41,6 @@ function render() {
     });
 }
 function addTask(task) {
-    tasks.push({ title: task.title, done: task.done });
+    tasks.push(task);
 }
+;

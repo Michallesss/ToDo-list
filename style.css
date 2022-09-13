@@ -73,15 +73,14 @@ button:hover {
     margin-left: 8px;
 }
 
-.gym {
-    color: darkblue;
-    list-style: circle;
+.home {
+    color: red;
 }
 
 .hobby {
-    color: darkgoldenrod;
+    color: green;
 }
 
 .work {
-    text-decoration: underline;
+    color: blue;
 }
