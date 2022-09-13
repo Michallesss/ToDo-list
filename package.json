@@ -1,0 +1,15 @@
+{
+  "name": "lekcja-6",
+  "version": "1.0.0",
+  "description": "typ array, objekty, klasy",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc",
+    "test": "tsc --watch"
+  },
+  "author": "Mikael#0168",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.8.3"
+  }
+}
