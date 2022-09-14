@@ -1,56 +1,35 @@
 const taskInputElement: HTMLInputElement=document.querySelector('#task-input');
 const addButtonElement: HTMLElement=document.querySelector('#add-button');
 const tasksContainerElement: HTMLElement=document.querySelector('.tasks');
+const categoriesContainerElement: HTMLElement = document.querySelector(".categories");
+let selectedCategory: Category='general';
 
-type Category="general"|"work"|"home"|"hobby";
-interface Task {
-    title: string;
-    done: boolean;
-    category?: Category// '?' means optional
-};
+import { render as renderCategories } from './modules/render-categories.js';
+import { render as renderTasks } from './modules/render-tasks.js';
+import { Task, Category } from './types/types';
 //const tasks:{title: string; done: boolean; category?: string}[]=[
-    const tasks: Task[]=[
+const categories: Category[]=['general', 'work', 'home', 'hobby'];
+const tasks: Task[]=[
     {title: "Zrobić pranie", done: false, category:"general"},
     {title: "Zrobić zakupy", done: false, category:"work"},
     {title: "Wyrzucić śmieci", done: true, category:"home"},
     {title: "Zrobić obiad", done: false, category:"hobby"}
 ];
-render();
 
 addButtonElement.addEventListener('click', (event: Event) => {
     event.preventDefault();
-    const categoryRadioElement: HTMLInputElement=document.querySelector('input[type="radio"]:checked');
-    addTask({title: taskInputElement.value, done: false, category: categoryRadioElement.value as Category});
-    render();
+    addTask({title: taskInputElement.value, done: false, category: selectedCategory});
+    renderTasks(tasks, tasksContainerElement);
 });
 
-function render() {
-    tasksContainerElement.innerHTML="";
-    tasks.forEach((task, index) => {
-        const id: string=`task-${index}`;
-        const taskElement: HTMLElement=document.createElement('li');
-        if(task.category) {taskElement.classList.add(task.category);}
+const updateSelectedCategory=(newSelectedCategory: Category)=>{
+    selectedCategory=newSelectedCategory;
+};
 
-        const labelElement: HTMLLabelElement=document.createElement('label');
-        labelElement.innerText=task.title;
-        labelElement.setAttribute('for', id);
-
-        const checkboxElement: HTMLInputElement=document.createElement('input');
-        checkboxElement.type='checkbox';
-        checkboxElement.name=task.title;
-        checkboxElement.checked=task.done;
-        checkboxElement.id=id;
-        checkboxElement.addEventListener('change', (event: Event) => {
-            task.done = !task.done;
-        });
-
-        taskElement.appendChild(labelElement);
-        taskElement.appendChild(checkboxElement);
-
-        tasksContainerElement.appendChild(taskElement);
-    });
-}
-
-function addTask(task: Task) {
+const addTask=(task: Task)=>{
     tasks.push(task);
 };
+
+renderTasks(tasks, tasksContainerElement);
+renderCategories(categories, categoriesContainerElement, updateSelectedCategory);
+// ! dodać możliwość usuwania zadań, dodawania i usuwania categorii i przy zaznaczeniu checkboxa przekreślić tekst taska (pamiętaj że to jest lista, więc przy renderowaniu tasków zrobić tak żeby renderowały się też jako zaznaczone)

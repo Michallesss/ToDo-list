@@ -8,7 +8,7 @@
     <meta name="author" content="Mikael#0168">
 
     <title>Todo list</title>
-    <script src="dist/app.js" defer></script>
+    <script type="module" src="dist/app.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png">
 </head>
@@ -17,8 +17,8 @@
     <form class="container" autocomplete="off">
         <label for="name">Task:</label>
         <input type="text" id="task-input">
-        <ul>
-            <li>
+        <ul class="categories">
+            <!--<li>
                 <input type="radio" name="category" value="general" id="general" checked>
                 <label for="general">General</label>
             </li>
@@ -33,7 +33,7 @@
             <li>
                 <input type="radio" name="category" value="hobby" id="hobby">
                 <label for="hobby">Hobby</label>
-            </li>
+            </li>-->
         </ul>
         <button id="add-button">Add</button>
         <p>Todo:</p>
