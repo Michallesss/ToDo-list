@@ -1,6 +1,13 @@
 export type Category="general"|"work"|"home"|"hobby";
-export interface Task {
+
+/*interface Task {
     title: string;
     done: boolean;
-    category?: Category// '?' means optional
-};
+    category?: Category;
+};*/
+/*enum Category {
+    GENERAL="general",
+    WORK="work",
+    HOME="home",
+    HOBBY="hobby"
+};*/

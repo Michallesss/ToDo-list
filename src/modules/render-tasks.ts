@@ -1,4 +1,4 @@
-import { Task } from "../types/types";
+import { Task } from "../classes/task-class.js";
 
 export const render=(tasks: Task[], tasksContainerElement: HTMLElement)=>{
     tasksContainerElement.innerHTML="";
@@ -17,7 +17,7 @@ export const render=(tasks: Task[], tasksContainerElement: HTMLElement)=>{
         checkboxElement.checked=task.done;
         checkboxElement.id=id;
         checkboxElement.addEventListener('change', (event: Event) => {
-            task.done = !task.done;
+            task.done=!task.done;
         });
 
         taskElement.appendChild(labelElement);

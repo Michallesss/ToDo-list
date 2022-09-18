@@ -1,24 +1,26 @@
 const taskInputElement: HTMLInputElement=document.querySelector('#task-input');
 const addButtonElement: HTMLElement=document.querySelector('#add-button');
 const tasksContainerElement: HTMLElement=document.querySelector('.tasks');
-const categoriesContainerElement: HTMLElement = document.querySelector(".categories");
+const categoriesContainerElement: HTMLElement=document.querySelector(".categories");
 let selectedCategory: Category='general';
 
+import { Task } from './classes/task-class.js';
 import { render as renderCategories } from './modules/render-categories.js';
 import { render as renderTasks } from './modules/render-tasks.js';
-import { Task, Category } from './types/types';
-//const tasks:{title: string; done: boolean; category?: string}[]=[
+import { Category } from './types/types.js';
+
 const categories: Category[]=['general', 'work', 'home', 'hobby'];
 const tasks: Task[]=[
-    {title: "Zrobić pranie", done: false, category:"general"},
-    {title: "Zrobić zakupy", done: false, category:"work"},
-    {title: "Wyrzucić śmieci", done: true, category:"home"},
-    {title: "Zrobić obiad", done: false, category:"hobby"}
+    new Task('Go back home', false, 'general'),
+    new Task('Make a TypeScript tutorial', false, 'work'),
+    new Task('Buy milk', false, 'home'),
+    new Task('Watch a movie', false, 'hobby')
 ];
 
 addButtonElement.addEventListener('click', (event: Event) => {
     event.preventDefault();
-    addTask({title: taskInputElement.value, done: false, category: selectedCategory});
+    const newTask: Task=new Task(taskInputElement.value, false, selectedCategory);
+    addTask(newTask);
     renderTasks(tasks, tasksContainerElement);
 });
 
@@ -32,4 +34,3 @@ const addTask=(task: Task)=>{
 
 renderTasks(tasks, tasksContainerElement);
 renderCategories(categories, categoriesContainerElement, updateSelectedCategory);
-// ! dodać możliwość usuwania zadań, dodawania i usuwania categorii i przy zaznaczeniu checkboxa przekreślić tekst taska (pamiętaj że to jest lista, więc przy renderowaniu tasków zrobić tak żeby renderowały się też jako zaznaczone)
